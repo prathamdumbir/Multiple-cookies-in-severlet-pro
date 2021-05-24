@@ -1,0 +1,157 @@
+first java servelet
+
+import java.io.IOException;
+
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+
+import javax.servlet.http.Cookie;
+
+import javax.servlet.http.HttpServlet;
+
+import javax.servlet.http.HttpServletRequest;
+
+import javax.servlet.http.HttpServletResponse;
+
+public class first extends HttpServlet {
+
+    @Override
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+
+            throws ServletException, IOException {
+
+        response.setContentType("text/html");
+
+      PrintWriter out=response.getWriter();
+
+      
+
+        String login=request.getParameter("login");
+
+        String pwd=request.getParameter("pwd");
+
+        
+
+        if(login.equals("first") && pwd.equals("page"))
+
+        {   Cookie c = new Cookie("c1",login);
+
+            response.addCookie(c);
+
+            out.print("<body bgcolor='Moccasin'>");
+
+            out.println("Cookie named:"+c.getName()+" added");
+
+            String path="/multiple/second";
+
+            out.println("<p><a href="+path+">next page</a></p>");
+
+              out.print("</body>");
+
+        } 
+
+        else { 
+
+} }
+
+}
+second java servelet
+import java.io.IOException;
+
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+
+import javax.servlet.http.Cookie;
+
+import javax.servlet.http.HttpServlet;
+
+import javax.servlet.http.HttpServletRequest;
+
+import javax.servlet.http.HttpServletResponse;
+
+public class second extends HttpServlet {
+
+    @Override
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+
+            throws ServletException, IOException {
+
+        response.setContentType("text/html");
+
+    PrintWriter out=response.getWriter();
+
+        Cookie c[]=request.getCookies();
+
+        out.println("c.length="+c.length);
+
+     for(int i=0;i<c.length;i++) {
+
+           out.print("<body bgcolor='Tomato'>");
+
+            out.println("CookieName=" + c[i].getName() + 
+
+                        "CookieValue=" + c[i].getValue()); }
+
+           //to add another cookie
+
+           Cookie c1 = new Cookie("c2","0445");
+
+           response.addCookie(c1);
+
+
+
+        String path="/multiple/third";
+
+        out.println("<a href="+path+">next page</a>");
+
+    out.print("</body>");}}
+third java servelet
+import java.io.IOException;
+
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+
+import javax.servlet.http.Cookie;
+
+import javax.servlet.http.HttpServlet;
+
+import javax.servlet.http.HttpServletRequest;
+
+import javax.servlet.http.HttpServletResponse;
+
+public class third extends HttpServlet {
+
+    @Override
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+
+            throws ServletException, IOException {
+
+        response.setContentType("text/html");
+
+        PrintWriter out=response.getWriter();
+
+       Cookie c[]=request.getCookies();
+
+        for (Cookie c1 : c) {
+
+            out.print("<body bgcolor='Khaki'>");
+
+            out.println("<p>");
+
+            out.println("CookieName=" + c1.getName() + "CookieValue=" + c1.getValue());
+
+            out.println("</p>");
+
+            out.print("</body>");
+
+        }
+
+    } 
+
+}
